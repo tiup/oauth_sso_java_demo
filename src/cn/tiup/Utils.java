@@ -1,5 +1,7 @@
 package cn.tiup;
 
+import cn.tiup.models.UserInfo;
+import com.google.gson.Gson;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -21,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.URLEncoder;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
@@ -32,7 +35,7 @@ import java.security.cert.X509Certificate;
  */
 public class Utils {
 
-    public static String getUserInfo(String userURL, String accessToken) throws IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
+    public static UserInfo getUserInfo(String userURL, String accessToken) throws IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
         HttpClient client = createHttpClientAcceptsUntrustedCerts();
         HttpGet userInfoRequest = new HttpGet(userURL);
         userInfoRequest.addHeader("Authorization", "Bearer " + accessToken);
@@ -41,13 +44,8 @@ public class Utils {
         if (status != 200) {
             return null;
         }
-        BufferedReader rd = new BufferedReader(new InputStreamReader(userInfoResponse.getEntity().getContent()));
-        StringBuffer result = new StringBuffer();
-        String line = "";
-        while ((line = rd.readLine()) != null) {
-            result.append(line);
-        }
-        return result.toString();
+        Reader reader = new InputStreamReader(userInfoResponse.getEntity().getContent());
+        return (new Gson()).fromJson(reader, UserInfo.class);
     }
 
 

@@ -1,7 +1,11 @@
 package cn.tiup;
 
 
+import cn.tiup.models.UserInfo;
+import com.google.gson.Gson;
+
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,14 +40,10 @@ public class GetUserInfo extends HttpServlet {
             return;
         }
         //2. 获取用户信息
-        String userInfo = null;
+        UserInfo userInfo = null;
         try {
             userInfo = Utils.getUserInfo(userURL,accessToken);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (KeyStoreException e) {
-            e.printStackTrace();
-        } catch (KeyManagementException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         if (userInfo == null) {
@@ -51,12 +51,23 @@ public class GetUserInfo extends HttpServlet {
             return;
         }
         //3.打印用户信息，（可替换为其他操作）
+
         response.setContentType("text/html;charset=utf-8");
         PrintWriter out = response.getWriter();
         out.println("<html>");
         out.println("<h1>获取到的用户信息内容</h1>");
-        out.println("<div>" + userInfo + "</div>");
-        out.println("<h1>其中： linkedaccounts是学号信息</h1>");
+        out.println("<div>姓名：" + userInfo.name + "</div>");
+        out.println("<div>性别：" + userInfo.sex + "</div>");
+        out.println("<div>生日：" + userInfo.birthday + "</div>");
+        if (userInfo.linkedaccounts.size() > 0) {
+            int studentN = 0;
+            for (UserInfo.Linkedaccount act : userInfo.linkedaccounts) {
+               if (act.host.equals(schoolCode) ){
+                   out.println("<div>学号" + Integer.toString(studentN) + ": " + act.username + "</div>");
+                   studentN ++;
+                }
+            }
+        }
         out.println("</html>");
     }
 

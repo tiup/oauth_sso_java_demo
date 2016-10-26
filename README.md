@@ -5,9 +5,9 @@
 
 ### 1. 使用
 1. 运行 TiUP SSO SDK (https://github.com/tiup/oauth_sso)
-2. 修改 web.xml 11 行的代理地址。（默认是：http://localhost:2081/sso）
-3. 修改 web.xml 33 行为用户信息地址。（默认是：http://api-accounts.***.edu.cn/oauth2/v1/userinfo）
-4. 修改 web.xml 38 学校代码，可以为：cug，ruc，等
+2. 修改 web/WEB-INF/web.xml 11 行的代理地址。（默认是：http://localhost:2081/sso）
+3. 修改 web/WEB-INF/web.xml 33 行为用户信息地址。（默认是：http://api-accounts.***.edu.cn/oauth2/v1/userinfo）
+4. 修改 web/WEB-INF/web.xml 38 学校代码，可以为：cug，ruc，等
 
 
 ### 2. SSO登录演示
@@ -18,6 +18,15 @@
 ### 3. SSO退出演示
 
 进入：/sso/logout?redirect_uri=<你的退出后返回的地址>
+
+## 4. 集成到现有项目
+
+4.1 下载：build/sso.jar, web/WEB-INF/lib 所有文件，到您的web项目 的 lib文件夹。
+4.2 参考web/WEB-INF/web.xml, 修改您的 web.xml 文件。
+
+备注：如果您的jdk版本在1.7 或以下，可能需要自行编译sso.jar 文件，源码在src目录。
+
+
 
 
 

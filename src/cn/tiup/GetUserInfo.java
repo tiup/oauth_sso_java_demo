@@ -35,6 +35,7 @@ public class GetUserInfo extends HttpServlet {
             Utils.login(request, response,schoolCode);
             return;
         }
+        //2. 获取用户信息
         String userInfo = null;
         try {
             userInfo = Utils.getUserInfo(userURL,accessToken);
@@ -48,7 +49,7 @@ public class GetUserInfo extends HttpServlet {
         if (userInfo == null) {
             Utils.login(request, response,schoolCode);
         }
-        //打印用户信息，（可替换为其他操作）
+        //3.打印用户信息，（可替换为其他操作）
         response.setContentType("text/html;charset=utf-8");
         PrintWriter out = response.getWriter();
         out.println("<html>");

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <servlet>
+        <servlet-name>sso</servlet-name>
+        <servlet-class>cn.tiup.httpproxy.ProxyServlet</servlet-class>
+        <init-param>
+            <param-name>targetUri</param-name>
+            <param-value>http://localhost:2081/sso</param-value>
+        </init-param>
+        <init-param>
+            <param-name>log</param-name>
+            <param-value>false</param-value>
+        </init-param>
+    </servlet>
+    <!--1.反向代理sso路由到 sso sdk-->
+    <servlet-mapping>
+        <servlet-name>sso</servlet-name>
+        <url-pattern>/sso/*</url-pattern>
+    </servlet-mapping>
+
+
+    <!--2. 获取用户信息示例-->
+    <servlet>
+        <servlet-name>GetUserInfo</servlet-name>
+        <servlet-class>cn.tiup.GetUserInfo</servlet-class>
+        <init-param>
+            <param-name>userURL</param-name>
+            <!--填写你的用户信息获取接口-->
+            <param-value>http://api-accounts.cug.edu.cn/oauth2/v1/userinfo</param-value>
+        </init-param>
+        <init-param>
+            <!--填写你的学校域名代码-->
+            <param-name>schoolCode</param-name>
+            <param-value>cug</param-value>
+        </init-param>
+    </servlet>
+
+    <!--2.1 获取用户信息示例路由入口-->
+    <servlet-mapping>
+        <servlet-name>GetUserInfo</servlet-name>
+        <url-pattern>/api/v1/userinfo</url-pattern>
+    </servlet-mapping>
+
+
+
+
+
+</web-app>

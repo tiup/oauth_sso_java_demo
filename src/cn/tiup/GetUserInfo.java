@@ -48,6 +48,7 @@ public class GetUserInfo extends HttpServlet {
         }
         if (userInfo == null) {
             Utils.login(request, response,schoolCode);
+            return;
         }
         //3.打印用户信息，（可替换为其他操作）
         response.setContentType("text/html;charset=utf-8");

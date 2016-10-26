@@ -4,7 +4,7 @@
 标准JavaWeb架构，可以运行在Tomcat，glassfish等Servlet容器中。
 
 ### 1. 使用
-1. 运行 TiUP SSO SDK
+1. 运行 TiUP SSO SDK (https://github.com/tiup/oauth_sso)
 2. 修改 web.xml 11 行的代理地址。（默认是：http://localhost:2081/sso）
 3. 修改 web.xml 33 行为用户信息地址。（默认是：http://api-accounts.***.edu.cn/oauth2/v1/userinfo）
 4. 修改 web.xml 38 学校代码，可以为：cug，ruc，等

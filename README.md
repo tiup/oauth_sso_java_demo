@@ -23,8 +23,9 @@
 
 4.1 下载：build/sso.jar, web/WEB-INF/lib 所有文件，到您的web项目 的 lib文件夹。
 4.2 参考web/WEB-INF/web.xml, 修改您的 web.xml 文件。
+4.3 参考 GetUserInfo.java 在您项目的登录入口和需要的地方获取用户信息
 
-备注：如果您的jdk版本在1.7 或以下，可能需要自行编译sso.jar 文件，源码在src目录。
+备注：如果您的jdk版本在1.6 或以下，可能需要自行编译sso.jar 文件，源码在src目录。
 
 
 

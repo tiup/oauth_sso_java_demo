@@ -33,7 +33,24 @@ import java.security.cert.X509Certificate;
 /**
  * Created by leenanxi on 2016/10/26.
  */
-public class Utils {
+public  class Utils {
+
+
+    public static UserInfo getUserInfo(HttpServletRequest req, String userURL, String schoolCode){
+        //1. 获取access token
+        String accessToken = Utils.getAccessToken(req);
+        if (accessToken == null) {
+            return null;
+        }
+        //2. 获取用户信息
+        UserInfo userInfo = null;
+        try {
+            userInfo = Utils.getUserInfo(userURL,accessToken);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userInfo;
+    }
 
     public static UserInfo getUserInfo(String userURL, String accessToken) throws IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
         HttpClient client = createHttpClientAcceptsUntrustedCerts();

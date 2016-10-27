@@ -33,29 +33,19 @@ public class GetUserInfo extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //1. 获取access token
-        String accessToken = Utils.getAccessToken(request);
-        if (accessToken == null) {
-            Utils.login(request, response,schoolCode);
-            return;
-        }
-        //2. 获取用户信息
-        UserInfo userInfo = null;
-        try {
-            userInfo = Utils.getUserInfo(userURL,accessToken);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //1. 获取用户信息
+        UserInfo userInfo = Utils.getUserInfo(request,userURL,schoolCode);
         if (userInfo == null) {
-            Utils.login(request, response,schoolCode);
+            //如果获取不到用户信息，执行登录操作，登录完成后会重新执行此次请求。
+            Utils.login(request,response,schoolCode);
             return;
         }
-        //3.打印用户信息，（可替换为其他操作）
-
+        //2.打印用户信息，（可替换为其他操作）
         response.setContentType("text/html;charset=utf-8");
         PrintWriter out = response.getWriter();
         out.println("<html>");
         out.println("<h1>获取到的用户信息内容</h1>");
+        out.println("<div>UID：" + userInfo.uid + "</div>");
         out.println("<div>姓名：" + userInfo.name + "</div>");
         out.println("<div>性别：" + userInfo.sex + "</div>");
         out.println("<div>生日：" + userInfo.birthday + "</div>");

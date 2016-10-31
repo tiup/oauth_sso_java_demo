@@ -16,7 +16,7 @@ ping api-accounts.***.edu.cn
 
 ### 2. 掌握最基本的JSP Servlet原理，了解web.xml, 熟悉Linux基本操作。
 
-Java中有很多框架例如Spring，struct等，需要明白所有的框架都是在Servlet之上实现的，都需要配置web.xml, 这个Java Demo 是与框架无关的，最基本的java实现。linux 基本操作是网站的必备技能之一，这个项目中可能用到，【运行可执行文件】，【修改HOST】，修改Java配置，编译jar。
+Java中有很多框架例如Spring，struct等，需要明白所有的框架都是在Servlet之上实现的，都需要配置web.xml, 这个Java Demo 是与框架无关的，最基本的java实现。linux 基本操作是网站的必备技能之一，这个项目中可能用到，【运行可执行文件】，【修改HOST】，【修改Java配置】，【编译jar】。
 
 ### 3. 在根目录下调试项目
 
